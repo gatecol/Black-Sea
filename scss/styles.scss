@@ -1,0 +1,376 @@
+@import './colors.scss';
+
+@mixin fontOptions($size, $color: white) {
+    font-size: $size;
+    color: $color;
+}
+
+@mixin flexible($horizontal: center, $vertical: center) {
+    display: flex;
+    align-items: $vertical;
+    justify-content: $horizontal;
+}
+
+body {
+    margin: 0;
+}
+
+.header {
+    width: 100%;
+    height: 87px;
+    background: $header-color;
+    @include flexible();
+
+    &-content {
+        height: 100%;
+        width: 1024px;
+        color: $text-color;
+        @include flexible(space-between);
+        box-sizing: border-box;
+        padding-left: 54px;
+
+        @media screen and (max-width: 1024px) {
+             width: 100%;
+        }
+
+        @media screen and (max-width: 780px) {
+            flex-direction: row-reverse;
+            padding-right: 54px;
+        }
+
+        @media screen and (max-width: 320px) {
+            padding: 0 100px;
+        }
+
+        &-links {
+            width: 463px;
+            @include flexible(space-between);
+
+            @media screen and (max-width: 780px) {
+                display: none;
+            }
+
+            .header-item {
+                text-transform: uppercase;
+                @include fontOptions(18px);
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        &__check:checked + .header-content__menu > .header-content__menu-line {
+            background-color: transparent;
+
+            &::after {
+                transform: rotate(-45deg);
+                top: 2px;   
+            }
+
+            &::before {
+                transform: rotate(45deg);
+                top: 2px;
+            }
+        }
+
+        &__check:checked ~ .menu{
+            width: 100%;
+            height: 100vh;
+            opacity: 1;
+        }
+
+        &__check {
+            display: none
+        }
+
+        &__menu {
+            height: 60px;
+            width: 60px;
+            border: 2px solid white;
+            border-radius: 4px;
+            @include flexible();
+            cursor: pointer;
+            display: none;
+            position: relative;
+            z-index: 2;
+
+            @media screen and (max-width: 780px) {
+                display: flex;
+                flex-direction: row-reverse;
+            }
+
+            &-line {
+                width: 50px;
+                height: 3px;
+                background-color: white;
+                position: relative;
+                transition: .4s;
+
+                &::after {
+                    content: '';
+                    width: 50px;
+                    height: 3px;
+                    background-color: white;
+                    position: absolute;
+                    left: 0;
+                    top: 13px;
+                    transition: .4s;
+                }
+
+                &::before {
+                    content: '';
+                    width: 50px;
+                    height: 3px;
+                    background-color: white;
+                    position: absolute;
+                    left: 0;
+                    top: -13px;
+                    transition: .4s;
+                }
+            }
+        }
+
+        .menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            background: $header-color;
+            background: linear-gradient(45deg, $header-color 0%, $green 100%);
+            z-index: 1;
+            transition: 0.1s;
+            opacity: 0;
+
+            @include flexible();
+
+            &__content {
+                width: 14rem;
+
+                &__item {
+                    @include fontOptions(2rem, white);
+                    border: 1px solid transparent;
+                    border-left: 1px solid white;
+                    padding: .6rem;
+                    width: 0;
+                    cursor: pointer;
+                    margin-bottom: 2rem;
+                    white-space: nowrap;
+                    
+                    &:hover {
+                        width: 7rem;
+                        border: 1px solid white;
+                        border-left: 1px solid white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+.banner {
+    width: 100%;
+    height: 475px;
+    @include flexible();
+    color: $text-color;
+    background-image: url('../images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    position: relative;
+
+    &-title {
+        text-transform: uppercase;
+        font-weight: bold;
+        @include fontOptions(35px);
+        text-align: center;
+        margin-bottom: 42px;
+    }
+
+    &-button {
+        font-size: 25px;
+        @include flexible();
+        border: 2px solid $text-color;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 240px;
+        height: 54px;
+        transition: .4s;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .2);
+        }
+    }
+
+    .dots {
+        width: 5rem;
+        @include flexible(space-between);
+        position: absolute;
+        bottom: 2rem;
+        left: calc(50% - 2.5rem);
+
+        &__item {
+            width: .5rem;
+            height: .5rem;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+
+            &_active {
+                background: #69728c;
+            }
+        }
+    }
+}
+
+.things {
+    @include flexible();
+    flex-direction: column;
+    padding: 5.25rem 0 5rem 0;
+    box-sizing: border-box;
+
+    &__title {
+        @include fontOptions(1.875rem, black);
+        margin-bottom: 2.44rem;
+        text-align: center;
+    }
+
+    &__text {
+        @include fontOptions(.875rem, black);
+        margin-bottom: 4.44rem;
+        text-align: center;
+    }
+
+    &__icons {
+        width: 25.94rem;
+        @include flexible(space-between);
+
+        @media screen and (max-width: 420px) {
+            width: 100%;
+            @include flexible(space-around)
+        }
+    }
+}
+
+.about {
+    width: 100%;
+    background: $green;
+    @include flexible();
+    flex-direction: column;
+    padding: 5.87rem 0;
+    box-sizing: border-box;
+    
+    @media screen and (max-width: 920px) {
+        
+    }
+
+    &__text {
+        @include fontOptions(1.13rem);
+        width: 56.25rem;
+
+        @media screen and (max-width: 920px) {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.card {
+    width: 17.87rem;
+    @include flexible(space-between, flex-start);
+    margin-bottom: 3.75rem;
+
+    &__name {
+        text-transform: uppercase;
+        @include fontOptions(1.63rem);
+        padding-top: .8rem;
+        font-weight: bold;
+        position: relative;
+
+        &::after {
+            content: "\201D";
+            position: absolute;
+            top: -1.2rem; 
+            left: -1rem;
+            @include fontOptions(17rem, rgba(255,255,255,.2));
+        }
+    }
+}
+
+.feedback {
+    width: 100%;
+    height: 32.4rem;
+    background-image: url('../images/map.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @include flexible();
+
+    &__form {
+        width: 26.9rem;
+        height: 26.9rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, .9);
+        @include flexible();
+        flex-direction: column;
+        padding-top: 4rem;
+        box-sizing: border-box;
+
+        @media screen and (max-width: 780px) {
+            width: 90%;
+            border-radius: 10px;
+        }
+
+        &-inp {
+            width: 17.2rem;
+            height: 1.93rem;
+            padding-left: .6rem;
+            border: 1px solid #d8d8d8;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        &-area {
+            width: 17.2rem;
+            border: 1px solid #d8d8d8;
+            resize: none;
+            height: 5rem;
+            padding: .6rem;
+            box-sizing: border-box;
+            outline: none;
+            margin-bottom: 2rem;
+        }
+
+        &-btn {
+            width: 4.2rem;
+            height: 4.2rem;
+            border-radius: 50%;
+            outline: none;
+            border: none;
+            background-image: url('../images/submit.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+}
+
+.footer {
+    background: $green;
+    height: 2.5rem;
+    @include flexible();
+    text-transform: uppercase;
+    @include fontOptions(.7rem);
+    width: 100%;
+}
+
+

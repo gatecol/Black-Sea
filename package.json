@@ -1,0 +1,20 @@
+{
+  "name": "black_sea",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "node-sass scss/ -o css/",
+    "watch": "npm run compile && node-sass scss/styles.scss -wo css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Holmes4657/Black-Sea.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/Holmes4657/Black-Sea#readme",
+  "dependencies": {
+    "node-sass": "^4.13.0"
+  }
+}
