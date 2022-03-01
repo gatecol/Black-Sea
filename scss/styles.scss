@@ -13,6 +13,7 @@
 
 body {
     margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 .header {
@@ -30,12 +31,12 @@ body {
         padding-left: 54px;
 
         @media screen and (max-width: 1024px) {
-             width: 100%;
+            width: 100%;
         }
 
         @media screen and (max-width: 780px) {
             flex-direction: row-reverse;
-            padding-right: 54px;
+            padding: 0 11px;
         }
 
         @media screen and (max-width: 320px) {
@@ -61,12 +62,12 @@ body {
             }
         }
 
-        &__check:checked + .header-content__menu > .header-content__menu-line {
+        &__check:checked+.header-content__menu>.header-content__menu-line {
             background-color: transparent;
 
             &::after {
                 transform: rotate(-45deg);
-                top: 2px;   
+                top: 2px;
             }
 
             &::before {
@@ -75,7 +76,7 @@ body {
             }
         }
 
-        &__check:checked ~ .menu{
+        &__check:checked~.menu {
             width: 100%;
             height: 100vh;
             opacity: 1;
@@ -158,7 +159,7 @@ body {
                     cursor: pointer;
                     margin-bottom: 2rem;
                     white-space: nowrap;
-                    
+
                     &:hover {
                         width: 7rem;
                         border: 1px solid white;
@@ -264,10 +265,8 @@ body {
     flex-direction: column;
     padding: 5.87rem 0;
     box-sizing: border-box;
-    
-    @media screen and (max-width: 920px) {
-        
-    }
+
+    @media screen and (max-width: 920px) {}
 
     &__text {
         @include fontOptions(1.13rem);
@@ -296,9 +295,9 @@ body {
         &::after {
             content: "\201D";
             position: absolute;
-            top: -1.2rem; 
+            top: -1.2rem;
             left: -1rem;
-            @include fontOptions(17rem, rgba(255,255,255,.2));
+            @include fontOptions(17rem, rgba(255, 255, 255, .2));
         }
     }
 }
@@ -306,13 +305,15 @@ body {
 .feedback {
     width: 100%;
     height: 32.4rem;
-    background-image: url('../images/map.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     @include flexible();
+    position: relative;
+
+    & > iframe {
+        position: absolute;
+    }
 
     &__form {
+        z-index: 999;
         width: 26.9rem;
         height: 26.9rem;
         border-radius: 50%;
@@ -372,5 +373,3 @@ body {
     @include fontOptions(.7rem);
     width: 100%;
 }
-
-
