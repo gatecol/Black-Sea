@@ -15,6 +15,6 @@
   "license": "ISC",
   "homepage": "https://github.com/Holmes4657/Black-Sea#readme",
   "dependencies": {
-    "node-sass": "7.0.1"
+    "node-sass": "8.0.0"
   }
 }
